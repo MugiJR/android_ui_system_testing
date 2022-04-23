@@ -43,6 +43,7 @@ public class MainActivitySystemTest {
     }
 
     @Test
+    // Normal Behaviour
     public void mainActivitySystemTest_withValidInputs() {
         i1.perform(replaceText("premium"), closeSoftKeyboard());
         i2.perform(replaceText("5"), closeSoftKeyboard());
@@ -51,6 +52,7 @@ public class MainActivitySystemTest {
     }
 
     @Test
+    // Non-number second parameter as input
     public void mainActivitySystemTest_withInput2AsString() {
         i1.perform(replaceText("premium"), closeSoftKeyboard());
         i2.perform(replaceText("five"), closeSoftKeyboard());
@@ -59,6 +61,16 @@ public class MainActivitySystemTest {
     }
 
     @Test
+    // The second parameter greater than the length of the first parameter
+    public void mainActivitySystemTest_input2_largerThanInput1Length() {
+        i1.perform(replaceText("premium"), closeSoftKeyboard());
+        i2.perform(replaceText("10"), closeSoftKeyboard());
+        button.perform(click());
+        out.check(matches(withText("Character index can't be greater than input1 length")));
+    }
+
+    @Test
+    // First Parameter as Empty String
     public void mainActivitySystemTest_withInput1AsEmptyString() {
         i1.perform(replaceText(""), closeSoftKeyboard());
         i2.perform(replaceText("five"), closeSoftKeyboard());
@@ -67,6 +79,7 @@ public class MainActivitySystemTest {
     }
 
     @Test
+    // Second Parameter as Empty String
     public void mainActivitySystemTest_withInput2AsEmptyString() {
         i1.perform(replaceText("someinput"), closeSoftKeyboard());
         i2.perform(replaceText(""), closeSoftKeyboard());

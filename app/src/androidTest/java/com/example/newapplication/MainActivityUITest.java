@@ -46,6 +46,22 @@ public class MainActivityUITest {
     }
 
     @Test
+    // checks the second parameter whether it is a number or not
+    public void mainActivityUITest_checkInput2_isNumberOrNot() {
+        input1 = "Quality";
+        input2 = "Imnotaninteger";
+        i1.perform(replaceText(input1), closeSoftKeyboard());
+        i2.perform(replaceText(input2), closeSoftKeyboard());
+        button.perform(click());
+        try {
+            out.check(matches(withText("Character index must be a natural number")));
+        }
+        catch (Exception ex) {
+            out.check(matches(withText(ex.getMessage())));
+        }
+    }
+
+    @Test
     public void mainActivityUITest_withValidInputs() {
         input1 = "Quality";
         input2 = "4";
